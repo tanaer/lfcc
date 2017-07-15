@@ -1,0 +1,87 @@
+<extend name="Base/common"/>
+
+<block name="title"><title>扫码支付－{:S('WEB_NAME')}</title></block>
+<block name="style">
+<link rel="stylesheet" type="text/css" href="__CSS__/user.css">
+</block>
+<block name="script">
+<script>
+$(function(){
+	$("a[data-pro='ok']").click(function(event){
+		var url = $(this).attr('data-action');
+		var childs = $('#pro-view-info').find('input');
+		
+		var i=0;
+		var data=[];
+		for(i=0;i<childs.length;i++)
+		{
+			data.push({name:childs[i].name,value:childs[i].value});
+		}
+		
+		data.push({name:'bankcode', value:$('#bankcode').val()});
+		
+		$.ajax(url,data,function(re){
+			var status = re.status;
+			if(status==1)
+			{
+				showDialog(re.info);
+				
+				setTimeout(function(){
+					if(re.url)
+						window.location.href=re.url;
+				},1500);			
+			}
+			else
+			{
+				showDialog(re.info);
+			}
+		},'json');
+		return false;
+	});
+});
+</script>
+</block>
+<block name="header"></block>
+<block name="body">
+<?php
+/* *
+ * 功能：一般支付调试入口页面
+ * 版本：1.0
+ * 日期：2015-03-26
+ * 说明：
+ * 以下代码只是为了方便商户测试而提供的样例代码。
+ */
+ 	require_once("./mb/Mobaopay.Config.php");
+	$time		= time();
+	$orderNo	= date("YmdHis",$time);
+	$tradeDate	= date("Ymd",$time); 
+?>
+<div id="pro-view-24" class="m-user">
+	<div id="pro-view-36" class="m-simpleHeader" data-pro="dvHeader">
+		<a href="javascript:history.back(-1);" data-pro="cancel" class="m-simpleHeader-back2">返回</a>
+		
+		<h1>扫码支付</h1>
+	</div>
+	<center>
+<body>
+<div align="center"><img src="images/wx.png" />
+<div align="center"><img src="images/zfb.png" />
+</div>
+
+<div class="czrow">						
+						
+							<dl>
+<dt>充值说明：</dt>
+								<dd>1.新会员首次充值先联系客服加公司收款账号，方便及时到账;</dd>
+								<dd>2.支付宝微信扫码即可完成充值;</dd>
+								<dd>3.转账后如10分钟未到账，请联系客服，官网QQ:1844388123 官网微信：1844388123。</dd>
+							</dl>
+						
+					</div>
+
+</div>
+</body>
+</center>
+</script>
+</block>		
+<block name="footer"></block>

@@ -1,0 +1,199 @@
+<extend name="Base/common"/>
+
+<block name="title"><title>在线充值－{:S('WEB_NAME')}</title></block>
+<block name="style">
+<link href="__CSS__/chongzhi.css" rel="stylesheet">
+</block>
+<block name="body">
+<?php
+/* *
+ * 功能：一般支付调试入口页面
+ * 版本：1.0
+ * 日期：2015-03-26
+ * 说明：
+ * 以下代码只是为了方便商户测试而提供的样例代码。
+ */
+ 	
+	$args[0]=$para; 
+?>
+<div class="effect mainnav-lg mainnav-fixed navbar-fixed footer-fixed" id="container">
+	<div id="page-content">
+		
+			<div class="panel">
+				<div class="panel-heading">
+					<h3 class="panel-title"><img alt="" src="__IMG__/main/cz.png">充值信息</h3>
+				</div>
+				<div class="panel-body chongzhibox">
+					<?php if($memberBank['bankId']==12 || $memberBank['bankId']==31) { ?>
+					<form action="/funpay/order2.php" method="post" name="a" > 
+					<input name="pa_MP" type="hidden" value="<?=$user['username']?>" />
+					<?php if($memberBank['bankId']==31) { ?>
+					<input name="directFlag" type="hidden" value="1" />
+					<input name="orgCode" type="hidden" value="wx" />
+					<?php } ?>
+					<div class="czbox">
+				
+						<div class="czrow">
+							<div class="czlabel">
+								                        充值金额：
+							</div>
+							<div class="cztxt">
+								<div class="jinebox">
+									
+									<input name="p3_Amt" id="amount" readonly value="<?=$args[0]['amount']?>" type="text" placeholder="请输入充值金额" value="" data-val-required="RechargeMoney 字段是必需的。" data-val-number="The field RechargeMoney must be a number." data-val="true"> 
+								</div>								
+							</div>
+						</div>
+						<div class="czrow">						
+							<div class="czlabel">
+								                        充值编号：
+							</div>
+							<div class="cztxt">
+								<div class="jinebox">
+									
+									<input name="p2_Order" id="rechargeId" readonly type="text" placeholder="请输入充值金额" value="<?=$args[0]['rechargeId']?>" data-val-required="RechargeMoney 字段是必需的。" data-val-number="The field RechargeMoney must be a number." data-val="true"> 
+								</div>								
+							</div>
+						</div>
+					</div>
+					<div class="czfoot">
+						<div class="czfootbox">
+							<button class="btn btn-primary" autocomplete="off" type="submit"> 
+                       继续下一步                     
+							</button>
+						</div>
+					</div>
+					</form>
+					<?php }else { ?>
+					<?php if($memberBank['bankId']==200) { ?>
+					<div style="position: absolute;margin-left: 340px">												
+						<img src="__IMG__/zhifubao.jpg"> </img>						 					
+					</div>
+					<?php } ?>
+					<div class="czrow">
+						<div class="czlabel">
+      <td align="right" style="font-weight:bold;" height="80">银行类型：</td>
+      <td align="left" >						
+								<a id="bank-link" target="_blank" href="http://<?=$memberBank['home']?>"><?=$memberBank['name'] ?>>></a>	
+	  <php>if($memberBank['id']==2) {</php><img id="bank-type-icon" style="width:150px" src="__IMG__/zhifubao.jpg" title="<?=$memberBank['name']?>" /><php>}</php>
+	  <php>if($memberBank['id']==22) {</php><img id="bank-type-icon" style="width:150px" src="__IMG__/weixin.jpg" title="<?=$memberBank['name']?>" /><php>}</php>									
+							</div>						
+						</div>
+					</div>
+					<div class="czrow">
+						<div class="czlabel">
+													用 户 名：
+						</div>
+						<div class="cztxt">
+							<div class="jinebox">
+								
+								<input name="amount" id="amount" style="width:250px;" readonly value="<?=$memberBank["username"] ?>" type="text" placeholder="请输入充值金额" value="" data-val-required="RechargeMoney 字段是必需的。" data-val-number="The field RechargeMoney must be a number." data-val="true"> 
+							</div>								
+						</div>
+					</div>
+					<div class="czrow">
+						<div class="czlabel">
+													帐&nbsp&nbsp &nbsp&nbsp 号：
+						</div>
+						<div class="cztxt">
+							<div class="jinebox">
+								
+								<input name="amount" id="amount" style="width:250px;" readonly value="<?=$memberBank["account"] ?>" type="text" placeholder="请输入充值金额" value="" data-val-required="RechargeMoney 字段是必需的。" data-val-number="The field RechargeMoney must be a number." data-val="true"> 
+							</div>								
+						</div>
+					</div>
+					<div class="czrow">
+						<div class="czlabel">
+													充值金额：
+						</div>
+						<div class="cztxt">
+							<div class="jinebox">
+								
+								<input name="amount" id="amount" style="width:250px;" readonly value="<?=$args[0]['amount']?>" type="text" placeholder="请输入充值金额" value="" data-val-required="RechargeMoney 字段是必需的。" data-val-number="The field RechargeMoney must be a number." data-val="true"> 
+							</div>								
+						</div>
+					</div>
+					<div class="czrow">						
+						<div class="czlabel">
+													充值编号：
+						</div>
+						<div class="cztxt">
+							<div class="jinebox">
+								
+								<input name="bianhao" id="bianhao" style="width:250px;" readonly type="text" placeholder="请输入充值金额" value="<?=$args[0]['rechargeId']?>" data-val-required="RechargeMoney 字段是必需的。" data-val-number="The field RechargeMoney must be a number." data-val="true"> 
+							</div>								
+						</div>
+					</div>
+					<hr>
+					<div class="czrow">						
+						
+							<dl>
+								<dt>充值说明：</dt>
+								<dd>1.每次"充值编号"均不相同,务必将"充值编号"填写正确,方便客户处理;</dd>
+								<dd>2.支付宝、微信首次转账后请申请加为好友，方便以后及时与客服沟通交流;</dd>
+								<dd>3.充值金额与实际转账金额不符，充值将无法到账;</dd>
+								<dd>4.转账后如10分钟未到账，请联系客服，告知您的充值编号和您的充值金额及你的银行用户姓名。</dd>
+							</dl>
+						
+					</div>
+					<?php } ?>
+				</div>
+			</div>
+			<input size="50" type="hidden" name="orderNo" id="orderNo" value='<?php echo $orderNo; ?>' />
+			<input size="50" type="hidden" name="tradeDate" id="tradeDate" value='<?php echo $tradeDate; ?>' />
+			<input size="50" type="hidden" name="merchParam" id="merchParam" value="{$user.uid}" />
+			<input size="50" type="hidden" name="tradeSummary" id="tradeSummary" value="{$user.username}" />
+		
+	</div>
+</div>
+<div style="display:none">
+<form class="form-signin" style="display:none" name="MerOrder" id="MerOrder" method="post" action="https://newpay.ips.com.cn/psfp-entry/gateway/payment.do">
+		<input type="hidden" name="pGateWayReq" id="pGateWayReq" value="" />
+	</form>
+</div>
+</block>
+<block name="script">
+<script src="__JS__/bootbox.min.js"></script>
+<script type="text/javascript">
+function fukuan(me){
+	
+	$(me).attr('disabled',true);
+	$(me).text('正在转接。。');
+	
+	var url='{:U("Recharge/index")}';
+	$.post(url,{amount: $('#amount').val(), rechargeId: $('#rechargeId').val()},function(result){
+		var head='<Ips><GateWayReq><head><Version>v1.0.0</Version><MerCode>' + result.MerCode + '</MerCode><MerName>嘉实网络</MerName><Account>'+result.account +'</Account><MsgId></MsgId><ReqDate>20160510000000</ReqDate><Signature>'
+		+ result.md5 + '</Signature></head>';
+		var html = head + result.body + '</GateWayReq></Ips>';
+		$('#pGateWayReq').val(html);
+		$('#MerOrder').submit();
+		$(me).attr('disabled',false);
+		$(me).text('开始付款');
+		//$.ajax('https://newpay.ips.com.cn/psfp-entry/gateway/payment.do',{pGateWayReq:html},function(){});
+	});
+	return false;
+}
+$(document).ready(function () {
+	$("#j-query").on("click", function () {
+		var me=this;
+		$(me).attr('disabled',true);
+		$.ajax({
+			type: "POST",
+			url: '{:U("cash/cash")}',
+			data: { amount: $('#TikuanMoney').val(), coinpwd: $('#FundsPass').val(), id: $('#UserBankId').val()},
+			dataType: "json",
+			global: false,
+			success: function (result) {
+				$(me).removeAttr('disabled');
+				bootbox.alert(result.info);
+			}, error: function (err) {
+				var t=err;				
+			}
+		});
+		//$("#teambetrecord").submit();
+	});
+	
+});
+
+</script>
+</block>

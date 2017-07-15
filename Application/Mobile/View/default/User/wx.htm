@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0079)http://touchdemo.myshopex.com/plugins/app/pay_myshopexcard/pay_myshopexcard.php -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  <meta name="robots" content="index,follow,noarchive"> <meta name="googlebot" content="noarchive"> <title>请按下列信息转账并付款...</title> <link href="./wx/personalprod.transfer-1.6.css" rel="stylesheet" type="text/css"> <script src="./wx/jquery-1.7.2.min.js"></script> <script src="./wx/ZeroClipboard.min.js"></script> <script type="text/javascript">
+var queryStatusPayNotify = function(){
+	$.ajax({
+	  type: 'POST',
+	  url: "",
+	  data: {'payment_id': ''},
+	  dataType: "json",
+	  success: function(obj){
+		if(obj.code==0 && obj.status!='ready'){
+			top.location.href = obj.url;
+		}
+	  }
+	});
+}
+var qrInterval;
+window.clearInterval(qrInterval);
+qrInterval = window.setInterval(function () {
+	queryStatusPayNotify();
+}, 1000 * 2);
+</script> <script type="text/javascript">
+function runCount(){
+    $("#count").html($("#count").html() * 1 + 1);
+}
+window.setInterval("runCount();", 1000);
+</script> <script>
+$(document).ready(function(){
+  $(".ui-tab4-trigger-item").on('click', function(){	
+	$(".ui-tab4-trigger-item").removeClass('ui-tab4-trigger-item-current');
+	$(this).addClass('ui-tab4-trigger-item-current');
+	$('.content-box').addClass('fn-hide');
+	$("#"+$(this).attr('data-box-target')).removeClass('fn-hide');
+  });
+  
+  var clip = new ZeroClipboard( $('.clip_button'), {
+	moviePath: "js/ZeroClipboard.swf"
+  });
+  clip.on( 'complete', function(client, args) {
+   alert("复制成功："+ args.text);
+  });
+});
+</script> <script charset="utf-8" src="./wx/p.js$312433353836243435633134383837336139623435396238306136663965633433386264353762$1463626627"></script></head> <body style="margin-top:20px;"> <div class="ui-grid-22 ui-grid-center"> <div class="content payment"> <div class="page-head"> <div class="ui-tab4"> <ul class="ui-tab4-trigger fn-clear"> <li class="ui-tab4-trigger-item ui-tab4-trigger-item-current" data-box-target="box-1"> <a class="ui-tab4-trigger-text needIframe" href="javascript:void(0);">微信扫码付款</a> </li> 
+<!--li class="ui-tab4-trigger-item" data-box-target="box-2"> <a class="ui-tab4-trigger-text needIframe" href="javascript:void(0);">支付宝网页在线付款</a> </li><li class="ui-tab4-trigger-item" data-box-target="box-3"> <a class="ui-tab4-trigger-text needIframe" href="javascript:void(0);">支付宝手动转账付款</a> </li> 
+</ul> </div> </div> <div class="out-border"> <div id="box-1" class="rbox content-box"> <div class="ui-tiptext-container2"> <p class="ui-tiptext-message2 ui-tiptext-red "> 温馨提示：使用手机支付宝扫码后请按下图所示内容填写付款金额和备注，否则将不能自动到账，谢谢！</p> --></div> <div class="fn-clear" style="margin:10px 0;"> <div style="float:left;"> <img width="292" height="292" src="./wx/4422875341317181.png"> </div> <div class="arrow"> </div> <div class="phone"> <div class="payAmount"></div> <div class="title"></div> 
+</div> </div> </div> <div id="box-2" class="rbox content-box fn-hide"> <div class="ui-tiptext-container2"> <p class="ui-tiptext-message2 ui-tiptext-red "> 温馨提示：请按下面步骤分别操作，谢谢！</p> <p class="ui-tiptext-message2 ui-tiptext-black fn-hide"> <a target="_blank" href=""></a></p> </div> <div class="ui-form-input2"> <div class="ui-form-item2 yui-ac"> <p style="padding:2px; font-size:14px;">步骤一：点击下方按钮登录您的支付宝后返回本页面</p> <p style="padding:2px; font-size:14px; color:#ff0000;">(支付宝如果已经登录了的可跳过此步) </p> <div class="ui-button ui-button-mblue"><a hidefocus="hidefocus" href="http://www.alipay.com/" target="_blank" class="ui-button-text">登录支付宝</a></div> 
+</div> <div class="ui-form-item2 yui-ac"> <!--<p style="padding:2px; font-size:14px;">步骤二：点击下方按钮后即可到达充值页面</p> <div class="ui-button ui-button-mblue"><a hidefocus="hidefocus" href="http://touchdemo.myshopex.com/plugins/app/pay_myshopexcard/pay_myshopexcard.php?url=https%3A%2F%2Fshenghuo.alipay.com%2Fsend%2Fpayment%2FtaobaoSellerFill.htm%3F" target="_blank" class="ui-button-text">前往立即付款</a></div> 
+</div> <div class="ui-form-item2 yui-ac"><p style="padding:2px; font-size:14px; color:#ff0000;">付款完成后将自动为您完成交易</p></div> </div> </div> <div id="box-3" class="rbox content-box fn-hide"> <div class="ui-tiptext-container2"> <p class="ui-tiptext-message2 ui-tiptext-red "> 温馨提示：请按照下面信息进行支付宝转账付款，否则将不能自动到账，谢谢！</p> <p class="ui-tiptext-message2 ui-tiptext-black fn-hide"> <a target="_blank" href=""></a></p> </div> <div class="ui-form-input2"> <fieldset> <div class="ui-form-item2 yui-ac"> <label for="" class="ui-form-label2">收款人：</label> <input placeholder="vip1zw@163.com" readonly="true" value="" name="optEmail" maxlength="80" class=" fn-left i-text " seed="fz_input_fdemail" id="optEmail" isdisplay="true" ui-form-explain2=" " autocomplete="off"> <button class="clip_button button green" title="单击复制到剪贴板" data-clipboard-target="optEmail" data-clipboard-text="">复制</button> 
+<span class="clip_tips"></span> </div> <div class="ui-form-item2" id="forAmount"> <label class="ui-form-label2" for="amount">付款金额：</label>  <input placeholder="金额自填" readonly="true" value="" readonly="true" value="" id="payAmount" class="i-text i-text-amount" maxlength="13" name="payAmount" seed="fk_input_money" ui-form-explain2="">元 <button class="clip_button button green" title="单击复制到剪贴板" data-clipboard-target="payAmount" data-clipboard-text="">复制</button> 
+<span class="clip_tips"></span> </div> <div class="ui-form-item2"> <label class="ui-form-label2" for="reason">付款说明：</label> <input type="text" placeholder="填写您要充值的账号" readonly="true" id="title" maxlength="40" class="i-text" value="" name="title" seed="fk_input_reason" ui-form-explain2=" "> <button class="clip_button button green" title="单击复制到剪贴板" data-clipboard-target="title" data-clipboard-text="">复制</button> 
+<span class="clip_tips"></span> </div> <div id="commentsArea" class="ui-form-item2"> <label class="ui-form-label2">备注：</label> <textarea seed="comments-area" class="i-textarea" name="memo" id="memo" ui-form-explain2="备注内容对方可以看到。(还可以输入50个字）"></textarea> <button class="clip_button button green" title="单击复制到剪贴板" data-clipboard-target="memo" data-clipboard-text="">复制</button> 
+<span class="clip_tips"></span> </div> </fieldset> </div> <div class="ui-form-item2 button-item fn-clear"> <div class="ui-button ui-button-mblue"> <a hidefocus="hidefocus" href="https://auth.alipay.com/login/index.htm?goto=https%3A%2F%2Fshenghuo.alipay.com%2Fsend%2Fpayment%2Ffill.htm%3F" target="_blank" class="ui-button-text">登录您的支付宝并开始转账...</a> </div> 
+</div> </div> </div> </div> <div id="loading">亲，系统正在等待处理您的付款哦～<span id="count">75</span>秒</div> </div>  --> <div id="global-zeroclipboard-html-bridge" class="global-zeroclipboard-container" style="position: absolute; left: 0px; top: -9999px; width: 15px; height: 15px; z-index: 999999999;">      <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" id="global-zeroclipboard-flash-bridge" width="100%" height="100%">         <param name="movie" value="js/ZeroClipboard.swf?noCache=1466470189769">         <param name="allowScriptAccess" value="sameDomain">         <param name="scale" value="exactfit">         <param name="loop" value="false">         <param name="menu" value="false">         <param name="quality" value="best">         <param name="bgcolor" value="#ffffff">         <param name="wmode" value="transparent">         <param name="flashvars" value="trustedOrigins=touchdemo.myshopex.com%2C%2F%2Ftouchdemo.myshopex.com%2Chttp%3A%2F%2Ftouchdemo.myshopex.com">         <embed src="js/ZeroClipboard.swf?noCache=1466470189769" loop="false" menu="false" quality="best" bgcolor="#ffffff" width="100%" height="100%" name="global-zeroclipboard-flash-bridge" allowscriptaccess="sameDomain" allowfullscreen="false" type="application/x-shockwave-flash" wmode="transparent" pluginspage="http://www.macromedia.com/go/getflashplayer" flashvars="trustedOrigins=touchdemo.myshopex.com%2C%2F%2Ftouchdemo.myshopex.com%2Chttp%3A%2F%2Ftouchdemo.myshopex.com" scale="exactfit">                </object></div><div id="tongji_div" style="position: fixed; left: 0px; top: 0px; overflow: visible; z-index: 2147483647; width: 0px; height: 0px;"></div><div style="display: none;"><iframe src="./wx/static.html" width="0" height="0" style="display: none;"></iframe></div></body></html>

@@ -1,0 +1,42 @@
+.loginformboxcontent>div
+{
+    padding-top:10px
+}
+.loginformboxcontent > p {
+    text-align: left;
+    margin-bottom:20px;
+    margin-top: 10px;
+    height:auto
+}
+.loginformboxcontent > p > strong {
+    padding-left: 12px;
+    box-sizing: border-box;
+}
+.mbk
+{
+    position:absolute;
+    right:5px;
+    top:5px;
+    width:280px;
+    padding-bottom:3px;
+    padding-top:2px;
+    background-color:#999;
+    z-index:99;
+    display:none
+}
+.mbk p
+{
+    text-align:center
+}
+.mbk p input
+{
+    border:0;
+    background-color:#0067c6;
+    border-radius:5px;
+    color:#fff;
+    height:30px;
+    line-height:30px;
+    width:90px;
+    text-align:center;
+    margin:auto
+}
